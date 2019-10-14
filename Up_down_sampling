@@ -1,0 +1,17 @@
+# 文件输入为（数据（batchsize,h,w），上下采样倍数，采样方法(可取值0，1，3)）
+# 0表示nearest interpolation, 1表示bilinear interpolation， 3表示cubic interpolation，默认为3
+# 需要引用的头文件
+# from scipy import ndimage
+
+def down_up_sanples(data, scale=2, method=3):
+  data1 = []
+  count = 0
+  for tmp in data:
+    count += 1
+    print("%d-th 高斯模糊" % count)
+    guss = ndimage.filters.gaussian_filter(tmp, sigma=scale)
+    gussdownsample = ndimage.zoom(guss, 1/scale, order=3)
+    gussupsample = ndimage.zoom(gussdownsample, scale, order=3)
+    data1.append(gussupsample)
+  return data1
+  
