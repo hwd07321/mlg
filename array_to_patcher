@@ -2,7 +2,7 @@
 # 输入为strid:滑动步长，input:输入数据，label：标签数据, image_size:切片大小
 # 因为mri图像一般都是三维，所以在处理时可以将其看作是n张两维的图片，并对二维图像进行处理
 # 返回值是切好的小块，且标签和输入一一对应
-
+import numpy as np
 def array_to_patch(strid, inputs, label, image_size):
     input_patches = []
     label_patches = []
