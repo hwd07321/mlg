@@ -1,6 +1,6 @@
 # 该文件能够将nii格式的MRI图像保存为npy格式，以便程序能够使用np将文件直接读为np数组格式
 # path_des为npy文件的保存地址，path_org为nii文件的地址
-
+import nibabel
 def nii_npy(path_des, path_org):
     if not os.path.exists(path_des):
         os.mkdir(path_des)
