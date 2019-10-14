@@ -1,0 +1,15 @@
+# 读取npy格式的数据
+# npy_path表示npy的地址，下方有实例，*.npy表示所有以npy结尾的文件，返回值是读取并切好的部分，格式为np类数组
+
+def read_npy(npy_path):
+    # npy_path = './HCP_NPY/*.npy'
+    x = []
+    for file_name in glob.glob(npy_path):
+        file = np.array(np.load(file_name), dtype=np.float32)
+        print("the shape of data is {}".format(file.shape))
+        for i in range(20, len(file)-20):
+            # 截取部分图像，因为在MRI图像中很多边缘都是黑色的，我们只需要中间一部分的信息，师兄师姐们的经验来说是前后各去掉20（原图大小256×256）
+            x.append(file[i][20:236, 20:236])
+    x = np.array(x)
+    print("The number of data is {}".format(x.shape[0]))
+    return x
